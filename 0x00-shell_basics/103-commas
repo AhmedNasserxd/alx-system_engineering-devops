@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -mindepth 1 -maxdepth 1 -print | LC_ALL=C sort -df | tr '\n' ', ' | sed 's/, $/\n/'
+printf "%s, " . .. * | sed 's/, $/\n/'
