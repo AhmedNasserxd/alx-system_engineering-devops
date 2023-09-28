@@ -1,2 +1,2 @@
 #!/bin/bash
-printf "%s, " $(ls -A | sort -d) | sed 's/,$/\//'
+for file in * .[!.]* ..?*; do printf '%s, ' "$file"; done | sed 's/, $/\n/'
