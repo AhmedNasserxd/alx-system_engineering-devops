@@ -1,2 +1,2 @@
 #!/bin/bash
-for file in * .[!.]* ..?*; do printf '%s, ' "$file"; done | sed 's/, $/\n/'
+find . -mindepth 1 -maxdepth 1 -print | LC_ALL=C sort -df | tr '\n' ', ' | sed 's/, $/\n/'
