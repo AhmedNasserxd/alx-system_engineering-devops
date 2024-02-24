@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This script displays a list of currently running processes, showing all processes, for all users, including those which might not have a TTY. It displays the processes in a user-oriented format and shows the process hierarchy.
+
+printf "%-10s %-10s %-5s %-5s %-10s %-10s %-10s %-10s %-10s %s\n" "USER" "PID" "%CPU" "%MEM" "VSZ" "RSS" "TTY" "STAT" "START" "TIME" "COMMAND"
+
+# Iterate over each process
+while read -r user pid pcpu pmem vsz rss tty stat start time command; do
+    # Print the process details in a user-oriented format
+    printf "%-10s %-10s %-5s %-5s %-10s %-10s %-10s %-10s %-10s %s %s\n" "$user" "$pid" "$pcpu" "$pmem" "$vsz" "$rss" "$tty" "$stat" "$start" "$time" "$command"
+done < <(ps -eo user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,command --sort=start)
