@@ -2,7 +2,7 @@
 # A script contains Function to handle SIGTERM and SIGQUIT signals,
 # Function to handle SIGINT signal, registering signal handlers, writing  PID to file, and loop indefinitely.
 cleanup() {
-    rm -f /var/run/holbertonscript.pid;
+    rm -f /var/run/myscript.pid;
     exit
 }
 
