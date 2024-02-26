@@ -1,38 +1,34 @@
 #!/usr/bin/env bash
 # Script to manage a process
 
-# Define the argument passed to the script
-argv1=$1
 file="/var/run/my_process.pid"
 
 # Function to start the process and create the PID file
 start_process() {
     ./manage_my_process &
-    echo "$!" > "$file"
+    echo "$!"  > "$file"
 }
 
 # Function to stop the process and remove the PID file
 stop_process() {
-    sudo pkill -f "./manage_my_process"
+    sudo pkill -of "./manage_my_process"
     rm "$file"
 }
 
 # Main function to handle start, stop, and restart actions
-case "$argv1" in
-    start)
-	start_process
-        echo "manage_my_process started"
-        ;;
-    stop)
-	stop_process
-        echo "manage_my_process stopped"
-        ;;
-    restart)
-	stop_process
-        start_process
-        echo "manage_my_process restarted"
-        ;;
-    *)
-        echo "Usage: manage_my_process {start|stop|restart}"
-        ;;
-esac
+if [ "${1}" == "start" ]
+then
+    start_process
+    echo "manage_my_process started"
+elif [ "${1}" == "stop" ]
+then
+    echo "manage_my_process stopped"
+    stop_process
+elif [ "${1}" == "restart" ]
+then
+    stop_process
+    start_process
+    echo "manage_my_process restarted"
+else
+    echo "Usage: manage_my_process {start|stop|restart}"
+fi
