@@ -6,12 +6,13 @@ file="/var/run/my_process.pid"
 # Function to start the process and create the PID file
 start_process() {
     ./manage_my_process &
+    touch /var/run/my_process.pid
     echo "$!"  > "$file"
 }
 
 # Function to stop the process and remove the PID file
 stop_process() {
-    sudo pkill -of "./manage_my_process"
+    kill "$(cat /var/run/my_process.pid)"
     rm "$file"
 }
 
