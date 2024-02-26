@@ -3,8 +3,6 @@
 
 # Define the argument passed to the script
 argv1=$1
-# Define the temporary file to store the PID
-tmpfile="/var/run/my_process.pid"
 
 # Function to start the process and create the PID file
 start_process() {
@@ -21,17 +19,17 @@ stop_process() {
 # Main function to handle start, stop, and restart actions
 case "$argv1" in
     start)
+	start_process
         echo "manage_my_process started"
-        start_process
         ;;
     stop)
+	stop_process
         echo "manage_my_process stopped"
-        stop_process
         ;;
     restart)
-        echo "manage_my_process restarted"
-        stop_process
+	stop_process
         start_process
+        echo "manage_my_process restarted"
         ;;
     *)
         echo "Usage: manage_my_process {start|stop|restart}"
