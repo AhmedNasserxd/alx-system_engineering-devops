@@ -9,13 +9,13 @@ tmpfile="/var/run/my_process.pid"
 # Function to start the process and create the PID file
 start_process() {
     ./manage_my_process &
-    echo "$!" > "$tmpfile"
+    echo "$!" > /var/run/my_process.pid
 }
 
 # Function to stop the process and remove the PID file
 stop_process() {
     sudo pkill -f "./manage_my_process"
-    rm "$tmpfile"
+    rm /var/run/my_process.pid
 }
 
 # Main function to handle start, stop, and restart actions
