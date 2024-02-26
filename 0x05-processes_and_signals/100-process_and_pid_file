@@ -2,21 +2,18 @@
 # A script contains Function to handle SIGTERM and SIGQUIT signals,
 # Function to handle SIGINT signal, registering signal handlers, writing  PID to file, and loop indefinitely.
 cleanup() {
-    echo "I hate the kill command"
-    rm -f /var/run/myscript.pid
+    rm -f /var/run/holbertonscript.pid;
     exit
 }
 
-int_handler() {
-    echo "Y U no love me?!"
-}
-
-trap 'cleanup' SIGTERM SIGQUIT
-trap 'int_handler' SIGINT
+trap "echo 'Y U no love me?!'" SIGINT
+trap "echo 'I hate the kill command'; rmfile_n_exit" SIGTERM
+trap "echo 'I hate the kill command'; rmfile_n_exit" SIGQUIT
 
 echo $$ > /var/run/myscript.pid
 
-while true; do
+while true
+do
     echo "To infinity and beyond"
-    sleep 1
+    sleep 2
 done
