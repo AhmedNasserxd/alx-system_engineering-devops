@@ -1,19 +1,17 @@
 #!/usr/bin/env bash
 # Script to manage a process
 
-file="/var/run/my_process.pid"
-
 # Function to start the process and create the PID file
 start_process() {
     ./manage_my_process &
     touch /var/run/my_process.pid
-    echo "$!"  > "$file"
+    echo "$!" > /var/run/my_process.pid
 }
 
 # Function to stop the process and remove the PID file
 stop_process() {
     kill "$(cat /var/run/my_process.pid)"
-    rm "$file"
+    rm /var/run/my_process.pid
 }
 
 # Main function to handle start, stop, and restart actions
